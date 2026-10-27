@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZZZ Build Manager · Your agents, your builds</title><style>
+:root{--bg:#0d121d;--p:#182233;--card:#19263a;--s:#111b2b;--border:#304058;--a:#7dd3fc;--t:#edf3ff;--mut:#aec0d6;--good:#86efac}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:14px/1.45 system-ui,Segoe UI,Arial,sans-serif}header{padding:21px 26px;background:linear-gradient(110deg,#1b3350,#0d1525);border-bottom:1px solid var(--border)}h1{font-size:26px;margin:0}header p{color:var(--mut);margin:6px 0 0}.app{display:grid;grid-template-columns:275px 1fr;min-height:calc(100vh - 99px)}nav{border-right:1px solid var(--border);background:#111a29;padding:16px;max-height:calc(100vh - 98px);position:sticky;top:0;overflow:auto}nav input{width:100%;background:#202d40;border:1px solid #43536b;border-radius:8px;padding:11px;color:var(--t);outline-color:var(--a)}nav .agent{display:flex;align-items:center;justify-content:space-between;width:100%;color:var(--t);background:none;border:0;text-align:left;border-radius:7px;padding:9px 10px;cursor:pointer}nav .agent:hover,.agent.active{background:#294261!important}small,.hint{color:var(--mut)}.badge{border:1px solid #49647d;border-radius:14px;padding:2px 8px;font-size:12px;color:#b5e7fe}main{padding:22px 26px;max-width:1250px;width:100%;margin:auto}.tools{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.tools select{background:#202d40;border:1px solid #45546d;padding:9px;color:var(--t);border-radius:7px}.panel,.tile{border:1px solid var(--border);background:var(--p);border-radius:12px;padding:18px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:11px}.tile{margin:0;background:#152137;padding:14px}.tile strong{font-size:20px;display:block}.tile span{font-size:12px;color:var(--mut)}.sectionTitle{font-size:17px;margin:3px 0 12px}.flex{display:flex;flex-wrap:wrap;gap:8px;align-items:center}table{width:100%;border-collapse:collapse}th,td{padding:9px 10px;border-bottom:1px solid #34435a;text-align:left}th{color:#b6c8df;font-weight:600;background:#203047}tr:last-child td{border-bottom:none}.discGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:12px}.disc{background:#131e2f;border:1px solid #394f65;border-radius:11px;padding:15px}.disc h4{margin:0 0 4px}.disc .mainstat{color:var(--good);font-weight:650;margin:10px 0}.disc table td{padding:5px 6px}.disc table td:last-child{text-align:right;font-variant-numeric:tabular-nums}.muted{color:var(--mut)}.good{color:var(--good)}.note{border-left:3px solid #649cc3;padding:8px 12px;color:#c3d7ea;background:#142338;margin:12px 0}.statRow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.statRow > div{padding:7px 10px;background:#132236;border-radius:6px}.statRow label{display:block;color:var(--mut);font-size:11px}.statRow b{font-size:16px}footer{padding:22px;color:var(--mut);font-size:12px}a{color:var(--a)}@media(max-width:760px){.app{display:block}nav{position:relative;max-height:260px;border-right:0;border-bottom:1px solid var(--border)}main{padding:14px}.discGrid{grid-template-columns:1fr}}
+
+.btn{border:1px solid #466485;background:#295075;color:#eff6ff;font:inherit;font-weight:600;border-radius:8px;padding:9px 13px;cursor:pointer}.btn:hover{background:#39638c}.btn.alt{background:#203249}.btn.danger{border-color:#835359;color:#ffdce0;background:#38212a}.btn.small{padding:5px 9px;font-size:12px}.btn:disabled{opacity:.5;cursor:default}.actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:14px 0}.actions .save-status{margin-left:auto;color:var(--mut);font-size:12px}.tools{margin-bottom:5px}.panel.editor{border-color:#517f9f;background:#15273b;padding:19px}.edit-heading h3{margin:0;font-size:19px}.edit-heading p{margin:5px 0 13px}.edit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px;margin-bottom:13px}.edit-grid label{display:flex;flex-direction:column;color:#c4d4e5;font-size:12px;gap:4px}.edit-grid label.wide{grid-column:span 2}.editor input,.editor select{width:100%;background:#101d2b;border:1px solid #50677e;color:#f0f7ff;border-radius:7px;padding:8px;min-height:36px;font-size:14px}.editor input:focus-visible,.editor select:focus-visible{outline:2px solid #86c5ed;outline-offset:1px}.editor h4{font-size:15px;margin:19px 0 10px}.editor .edit-disc{background:#0e1e2d;border:1px solid #3a5367;padding:12px 13px;margin:12px 0;border-radius:10px}.disc-edit-top,.disc-editor-head,.edit-sub-header{display:flex;justify-content:space-between;align-items:center;gap:10px}.edit-sub-header{font-size:12px;color:#bed0dd;margin:8px 0}.edit-sub{display:grid;grid-template-columns:minmax(120px,1.6fr) minmax(65px,.6fr) minmax(60px,.5fr) auto;gap:7px;align-items:end;margin:6px 0}.edit-sub label{font-size:11px;color:var(--mut)}.edit-sub output{color:#a0e5b5;align-self:center;text-align:right}.edit-sub .btn{align-self:center}.message{background:#25364c;border-left:3px solid #7dd3fc;color:#d9edff;padding:10px 14px;margin:10px 0;border-radius:3px}button:focus-visible{outline:2px solid #7dd3fc;outline-offset:2px}[hidden]{display:none!important}
+@media(max-width:940px){.app{grid-template-columns:210px 1fr}nav{padding:9px}main{padding:14px}.edit-grid label.wide{grid-column:auto}.edit-sub{grid-template-columns:1fr 90px}.edit-sub output{justify-self:start}}
+@media(max-width:640px){.app{display:block}nav{position:relative;max-height:150px;border-right:none;border-bottom:1px solid #304058}.edit-sub{grid-template-columns:1fr 70px}.actions .save-status{margin:0;width:100%}}
+
+.welcome{min-height:calc(100vh - 102px);display:grid;place-items:center;padding:36px 16px}.welcome-card{max-width:570px;width:100%;background:var(--p);border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:0 12px 40px #050b1690}.welcome h2{font-size:27px;margin:8px 0}.welcome p{color:var(--mut);line-height:1.65}.eyebrow{letter-spacing:.12em;font-size:11px;color:var(--a);font-weight:800}.uid-form label{display:block;font-weight:650;margin:22px 0 9px}.uid-row{display:flex;gap:10px}.uid-row input{background:#111d30;border:1px solid #57738e;border-radius:8px;color:#fff;font:inherit;padding:12px 15px;min-width:0;flex:1;font-size:17px}.uid-row .btn{white-space:nowrap}.welcome-split{border-top:1px solid var(--border);margin:25px 0 10px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--mut)}.session-bar{border:1px solid #314761;background:#15283d;border-radius:9px;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 13px;margin-bottom:16px}.session-bar span{font-weight:650}.session-bar div{display:flex;gap:8px}.empty{padding:32px;text-align:center;border:1px dashed #506c86;border-radius:12px;color:var(--mut)}@media(max-width:620px){.uid-row,.welcome-split,.session-bar{flex-wrap:wrap}.uid-row .btn,.uid-row input{width:100%}.welcome-card{padding:20px}.welcome{padding:12px}}
+</style></head><body><header><h1>Zenless Zone Zero · Build Manager</h1><p>Look up your own agents, experiment with Drive Discs and skills, and save private browser drafts.</p></header><section id="welcome" class="welcome" aria-label="Find your ZZZ account">
+  <div class="welcome-card">
+    <div class="eyebrow">GET STARTED</div>
+    <h2>Your ZZZ builds, not anyone else’s.</h2>
+    <p>Enter your Zenless Zone Zero UID to load your public Enka showcase. If your Enka profile shares saved builds, those may be included too. No HoYoverse password is needed.</p>
+    <form id="uidForm" class="uid-form"><label for="uidInput">Zenless Zone Zero UID</label><div class="uid-row"><input id="uidInput" inputmode="numeric" autocomplete="off" pattern="[0-9]{8,12}" maxlength="12" placeholder="Enter your UID" required><button type="submit" id="uidLoadBtn" class="btn">Find my agents</button></div></form>
+    <div id="welcomeMsg" class="message" role="status" hidden></div>
+    <div class="welcome-split"><span>Or start without fetching</span><div class="flex"><button type="button" id="emptyUidBtn" class="btn alt">Start empty</button><button type="button" id="landingImportBtn" class="btn alt">Import JSON</button></div></div>
+    <p class="muted" style="font-size:12px">Only public Showcase and saved builds can be fetched. Edits stay on this device unless exported. An API proxy may be required on GitHub Pages depending on Enka's cross-origin settings.</p>
+  </div>
+</section>
+<div class="app" id="workspace" hidden><nav><input id="search" placeholder="Find an agent…" aria-label="Find an agent"><div id="agentNav"></div></nav><main><div class="session-bar"><span id="accountTitle">Account</span><div><button id="refreshBtn" type="button" class="btn alt small">Refresh from Enka</button> <button id="changeUidBtn" type="button" class="btn alt small">Switch UID</button></div></div><div class="tools"><div><h2 id="agentName" style="font-size:25px;margin:0"></h2><div id="metaLine" class="hint"></div></div><select id="buildSelect" aria-label="Choose saved build"></select></div><div class="actions">
+<button type="button" id="editToggle" class="btn">Edit this build</button>
+<button type="button" id="cloneBtn" class="btn alt">Duplicate build</button>
+<button type="button" id="newBtn" class="btn alt">Add agent manually</button>
+<button type="button" id="exportBtn" class="btn alt">Export JSON backup</button>
+<button type="button" id="importBtn" class="btn alt">Import JSON</button>
+<button type="button" id="resetBtn" class="btn danger">Reset local edits</button>
+<input id="importFile" type="file" accept="application/json,.json" hidden>
+<span id="saveStatus" class="save-status" role="status">Edits saved locally in your browser</span>
+</div><p id="message" class="message" role="status" hidden></p>
+<section id="editor" class="panel editor" hidden></section>
+<div id="liveStatus" class="note">Loading official Enka reference definitions for complete stats…</div><div id="content"></div><footer>Game data is read from the current UID’s public Enka showcase or a JSON import. Names, reference stats and set effects come from <a href="https://github.com/EnkaNetwork/API-docs" target="_blank" rel="noopener">EnkaNetwork/API-docs</a>. Reference calculations are estimates and exclude conditional combat buffs and 4-piece effects. Edits save in this browser only; use Export JSON to back up or transfer them. A UID alone is not proof of ownership. Switching UIDs keeps each browser’s edits separate. GitHub Pages does not synchronize edits between devices.</footer></main></div>
+<script>
+const DATA={"metadata":{"app":"ZZZ Build Manager","source":"Public Enka UID lookup","notes":["Visitors start without any embedded character data.","UID does not authenticate account ownership.","Enka public Showcase data is limited to the published agents.","Browser edits are local to each UID, not stored on GitHub Pages."]},"builds":[],"lookup":{"agents":{"1011":"Anby","1021":"Nekomata","1031":"Nicole","1041":"Soldier 11","1051":"Yidhari","1061":"Corin","1071":"Caesar","1081":"Billy","1091":"Miyabi","1101":"Koleda","1111":"Anton","1121":"Ben","1131":"Soukaku","1141":"Lycaon","1151":"Lucy","1171":"Burnice","1181":"Grace","1191":"Ellen","1201":"Harumasa","1211":"Rina","1241":"Zhu Yuan","1271":"Seth","1281":"Piper","1311":"Astra Yao","1321":"Evelyn","1331":"Vivian","1341":"Zhao","1351":"Pulchra","1371":"Yixuan","1391":"Ju Fufu","1401":"Alice","1411":"Yuzuha","1421":"Pan Yinhu","1431":"Ye Shunguang","1441":"Manato","1451":"Lucia","1481":"Dialyn","1491":"Sunna","1501":"Aria","1511":"Nangong Yu","1551":"Pyrois","1561":"Velina","1571":"Norma","1581":"Remielle","1611":"Claret"},"discs":{"31000":"Woodpecker Electro","31100":"Puffer Electro","31200":"Shockstar Disco","31300":"Freedom Blues","31400":"Hormone Punk","31500":"Soul Rock","31600":"Swing Jazz","31800":"Chaos Jazz","31900":"Proto Punk","32200":"Inferno Metal","32300":"Chaotic Metal","32400":"Thunder Metal","32500":"Polar Metal","32600":"Fanged Metal","32700":"Branch & Blade Song","32800":"Astral Voice","32900":"Shadow Harmony","33000":"Phaethon’s Melody","33100":"Yunkui Tales","33200":"King of the Summit","33300":"Dawn’s Bloom","33400":"Moonlight Lullaby","33500":"White Water Ballad","33600":"Shining Aria","33700":"Bunny in Wonderland","33800":"Notes From the Chained","33900":"Wuthering Salon","34000":"The Sky Ablaze","34100":"Feathered Fate","34200":"Thorned Rose"},"weapons":{"12001":"[Lunar] Pleniluna","12002":"[Lunar] Decrescent","13001":"Starlight Engine","13002":"Slice of Time","13003":"Rainforest Gourmet","13005":"Steam Oven","13006":"Six Shooter","13007":"Original Transmorpher","13008":"Weeping Gemini","13012":"W-Engine #13012","13015":"Marcato Desire","13016":"W-Engine #13016","13019":"W-Engine #13019","13101":"Demara Battery Mark II","13103":"The Vault","13111":"Drill Rig - Red Axis","13113":"Bashful Demon","13115":"Kaboom the Cannon","13128":"Roaring Ride","14109":"Hailstorm Shrine","14118":"Fusion Compiler","14121":"Weeping Cradle","14131":"Elegant Vanity","14132":"Heartstring Nocturne","14139":"Roaring Fur-nace","14143":"Cloudcleave Radiance","14145":"Dreamlit Hearth","14151":"Neon Fantasies","14155":"W-Engine #14155","14158":"Ode of Resurrected Wings","14161":"Crimson Thirst"},"properties":{"11101":{"name":"Base HP","unit":"flat"},"11102":{"name":"HP%","unit":"pct"},"11103":{"name":"HP","unit":"flat"},"12101":{"name":"Base ATK","unit":"flat"},"12102":{"name":"ATK%","unit":"pct"},"12103":{"name":"ATK","unit":"flat"},"12201":{"name":"Base Impact","unit":"flat"},"12202":{"name":"Impact%","unit":"pct"},"13101":{"name":"Base DEF","unit":"flat"},"13102":{"name":"DEF%","unit":"pct"},"13103":{"name":"DEF","unit":"flat"},"20101":{"name":"Base CRIT Rate","unit":"pct"},"20103":{"name":"CRIT Rate","unit":"pct"},"21101":{"name":"Base CRIT DMG","unit":"pct"},"21103":{"name":"CRIT DMG","unit":"pct"},"23101":{"name":"Base PEN Ratio","unit":"pct"},"23103":{"name":"PEN Ratio","unit":"pct"},"23201":{"name":"Base PEN","unit":"flat"},"23203":{"name":"PEN","unit":"flat"},"30501":{"name":"Base Energy Regen","unit":"flat"},"30502":{"name":"Energy Regen%","unit":"pct"},"30503":{"name":"Energy Regen","unit":"flat"},"31201":{"name":"Base Anomaly Proficiency","unit":"flat"},"31203":{"name":"Anomaly Proficiency","unit":"flat"},"31401":{"name":"Base Anomaly Mastery","unit":"flat"},"31402":{"name":"Anomaly Mastery%","unit":"pct"},"31403":{"name":"Anomaly Mastery","unit":"flat"},"31503":{"name":"Physical DMG Bonus","unit":"pct"},"31603":{"name":"Fire DMG Bonus","unit":"pct"},"31703":{"name":"Ice DMG Bonus","unit":"pct"},"31803":{"name":"Electric DMG Bonus","unit":"pct"},"31903":{"name":"Ether DMG Bonus","unit":"pct"},"32303":{"name":"Wind DMG Bonus","unit":"pct"}}}};
+const $ = id => document.getElementById(id);
+const esc = value => String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+const enkaRoot='https://raw.githubusercontent.com/EnkaNetwork/API-docs/master/store/zzz/';
+const ENKA_PROXY_BASE = ''; // Optional: set to your Cloudflare Worker base URL, e.g. https://your-worker.workers.dev
+let activeUid = '';
+let STORAGE_KEY = '';
+let ttlDeadline = 0;
+let lastOwner = null;
+const percentIDs = new Set([11102,12102,12202,13102,20101,20103,21101,21103,23101,23103,30502,31402,31503,31603,31703,31803,31903,32303]);
+const displayNames = Object.fromEntries(Object.entries(DATA.lookup.properties).map(([id,p])=>[+id,p.name]));
+const label=id=>displayNames[+id]||`Property ${id}`;
+const fmt=(id,n)=>percentIDs.has(+id)?`${(n/100).toFixed(1)}%`:Number(n).toLocaleString('en-US',{maximumFractionDigits:1});
+const clone=v=>JSON.parse(JSON.stringify(v));
+let builds=[], refs=null, selectedAgent='', selectedBuild=null, editing=false, persistAvailable=true;
+let rawBackup=[];
+const discSets=Object.entries(DATA.lookup.discs).map(([id,name])=>({id:+id,name})).sort((a,b)=>a.name.localeCompare(b.name));
+const knownWeaponIds=Object.entries(DATA.lookup.weapons).sort((a,b)=>String(a[1]).localeCompare(String(b[1])));
+const SUB_VALUES={11102:300,11103:112,12102:300,12103:19,13102:480,13103:15,20103:240,21103:480,23103:240,23203:9,31203:9};
+const SUB_IDS=Object.keys(SUB_VALUES).map(Number);
+const MAIN_IDS={1:[11103],2:[12103],3:[13103],4:[11102,12102,13102,20103,21103,31203],5:[11102,12102,13102,23103,31503,31603,31703,31803,31903,32303],6:[11102,12102,13102,12202,30502,31402]};
+const MAIN_BASE={11103:550,12103:79,13103:46,11102:750,12102:750,13102:750,12202:450,20103:600,21103:1200,23103:600,30502:1500,31203:23,31402:750,31503:750,31603:750,31703:750,31803:750,31903:750,32303:750};
+const skillOrder=['Basic Attack','Dodge','Assist','Special Attack','Chain / Ultimate','Core Skill (raw)'];
+const safeNum=(v,lo,hi,def)=>Number.isFinite(+v)?Math.max(lo,Math.min(hi,+v)):def;
+function baseMain(slot,id){
+  const existing=builds.flatMap(b=>b.discs).find(d=>d.slot===slot&&d.main?.[0]?.property_id===+id);
+  return Number(existing?.main?.[0]?.source_base)||MAIN_BASE[id]||750;
+}
+function makeMain(d,id){const base=baseMain(d.slot,+id),scale=d.rarity==='S'?.2:d.rarity==='A'?.25:.3;const raw=base*(1+safeNum(d.level,0,15,15)*scale);
+ return {stat:label(id),kind:percentIDs.has(+id)?'pct':'flat',value:percentIDs.has(+id)?raw/100:raw,display:'+'+fmt(id,raw),property_id:+id,source_base:base,computed:'Enka approximate formula'};
+}
+function makeSub(id,rolls){id=+id;rolls=safeNum(rolls,1,10,1);const per=SUB_VALUES[id]||9,raw=per*rolls;
+ return {stat:label(id),kind:percentIDs.has(id)?'pct':'flat',value:percentIDs.has(id)?raw/100:raw,display:'+'+fmt(id,raw),rolls,property_id:id,per_roll:per};
+}
+function refreshDerived(b){
+ const sets={},ids={},gears={};
+ for(const d of b.discs){
+  d.level=safeNum(d.level,0,15,15);d.main=[makeMain(d,d.main?.[0]?.property_id||MAIN_IDS[d.slot][0])];
+  d.substats=(d.substats||[]).map(s=>makeSub(s.property_id,s.rolls));
+  d.set=DATA.lookup.discs[d.set_id]||d.set||`Set #${d.set_id}`;
+  d.id=(+d.set_id)+(d.rarity==='S'?40:d.rarity==='A'?30:20)+d.slot;
+  sets[d.set]=(sets[d.set]||0)+1;ids[d.set_id]=(ids[d.set_id]||0)+1;
+  for(const m of d.main)gears[m.property_id]=(gears[m.property_id]||0)+m.source_base*(1+d.level*(d.rarity==='S'?.2:d.rarity==='A'?.25:.3));
+  for(const s of d.substats)gears[s.property_id]=(gears[s.property_id]||0)+(s.per_roll*s.rolls);
+ }
+ b.set_counts=sets;b.set_ids=ids;b.gear_only_props_raw=gears;
+}
+function store(){
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify({builds,editedAt:new Date().toISOString()}));persistAvailable=true;$('saveStatus').textContent='Saved in this browser · '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});}catch(e){persistAvailable=false;$('saveStatus').textContent='Changes not stored locally. Export JSON to keep them.';}
+}
+function notify(msg){$('message').textContent=msg;$('message').hidden=false;}
+function byAgent(){return builds.filter(b=>b.agent===selectedAgent)}
+function current(){const mine=byAgent();if(!mine.length)return null;
+ if(!mine.some(b=>String(b.build_id)===String(selectedBuild)))selectedBuild=(mine.find(b=>b.mindscape===Math.max(...mine.map(a=>a.mindscape)))||mine[0]).build_id;
+ return mine.find(b=>String(b.build_id)===String(selectedBuild))}
+function agentList(){let agents=[...new Set(builds.map(b=>b.agent))].sort((a,b)=>a.localeCompare(b));const q=$('search').value.trim().toLowerCase();
+ $('agentNav').innerHTML=agents.filter(n=>n.toLowerCase().includes(q)).map(n=>`<button type="button" class="agent ${n===selectedAgent?'active':''}" data-agent="${esc(n)}"><span>${esc(n)}</span><small>${byAgentName(n).length} build${byAgentName(n).length===1?'':'s'}</small></button>`).join('');
+ document.querySelectorAll('[data-agent]').forEach(el=>el.onclick=()=>{selectedAgent=el.dataset.agent;selectedBuild=null;render();agentList()});
+}
+function byAgentName(n){return builds.filter(b=>b.agent===n)}
+function serverName(kind,id,fallback){if(!refs)return fallback;const loc=refs.locs?.en||{};
+ if(kind==='weapon'){const x=refs.weapons?.[id];return x?loc[x.ItemName]||fallback:fallback}
+ if(kind==='set'){const x=refs.equipments?.Suits?.[id];return x?loc[x.Name]||fallback:fallback}
+ return fallback}
+function calculate(b){if(!refs)return null;const a=refs.avatars?.[b.agent_id];if(!a)return null;
+ const base=a.BaseProps||{},growth=a.GrowthProps||{},promo=(a.PromotionProps||[])[Math.max(0,b.promotion-1)]||{},core=(a.CoreEnhancementProps||[])[b.core_enhancement||0]||{};
+ const char={};for(const id of new Set([...Object.keys(base),...Object.keys(growth),...Object.keys(promo),...Object.keys(core)]))char[id]=(+base[id]||0)+Math.floor(((+growth[id]||0)*(b.agent_level-1))/10000)+(+promo[id]||0)+(+core[id]||0);
+ const gear={...b.gear_only_props_raw};for(const [id,count] of Object.entries(b.set_ids)){const s=refs.equipments?.Suits?.[id];if(count>=2&&s)for(const [id2,val] of Object.entries(s.SetBonusProps||{}))gear[id2]=(+gear[id2]||0)+(+val)}
+ const w=refs.weapons?.[b.weapon?.id], lv=b.weapon?.level||0,br=b.weapon?.break_level||0;
+ const engMain=w?.MainStat?.PropertyValue*(1+ .1568166666666667*lv+.8922*br)||0;
+ const engSec=w?.SecondaryStat?.PropertyValue*(1+.3*br)||0;
+ const engP=w?.MainStat?.PropertyId,secP=w?.SecondaryStat?.PropertyId;
+ if(secP)gear[secP]=(+gear[secP]||0)+engSec;
+ const v=id=>+gear[id]||0, cb=id=>+char[id]||0;
+ const stats=[['HP',Math.floor(cb(11101)*(1+v(11102)/10000)+v(11103))],['ATK',Math.floor((cb(12101)+(engP===12101?engMain:0))*(1+v(12102)/10000)+v(12103))],['DEF',Math.floor((cb(13101)+(engP===13101?engMain:0))*(1+v(13102)/10000)+v(13103))],['Impact',cb(12201)*(1+v(12202)/10000)],['CRIT Rate',(cb(20101)+v(20103))/100],['CRIT DMG',(cb(21101)+v(21103))/100],['Anomaly Proficiency',cb(31201)+v(31203)],['Anomaly Mastery',cb(31401)*(1+v(31402)/10000)],['PEN Ratio',(cb(23101)+v(23103))/100],['PEN',cb(23201)+v(23203)],['Energy Regen',cb(30501)*(1+v(30502)/10000)]];
+ return {character:char,gear,engMain,engSec,engP,secP,stats};
+}
+function statFormat(n,v){return /CRIT|Ratio/.test(n)?Number(v).toFixed(1)+'%':Number(v).toLocaleString('en-US',{maximumFractionDigits:1});}
+function selectOptions(options,value){return options.map(([v,t])=>`<option value="${esc(v)}" ${String(v)===String(value)?'selected':''}>${esc(t)}</option>`).join('')}
+const numberInput=(field,value,min,max)=>`<input type="number" data-field="${field}" min="${min}" max="${max}" step="1" value="${value}" />`;
+function render(){const b=current();if(!b){$('agentName').textContent='No agents loaded yet';$('metaLine').textContent='Import a build or create one';$('buildSelect').innerHTML='';$('editor').hidden=true;$('content').innerHTML='<div class="empty">No builds here yet. Use <strong>Add agent manually</strong> or <strong>Import JSON</strong> to get started.</div>';return;}refreshDerived(b);$('agentName').textContent=b.agent;
+ $('metaLine').textContent=`Agent ID ${b.agent_id} · ${byAgent().length} saved entr${byAgent().length===1?'y':'ies'} · ${editing?'Editing':'Viewing'}`;
+ $('buildSelect').innerHTML=byAgent().map(x=>`<option value="${x.build_id}" ${String(x.build_id)===String(b.build_id)?'selected':''}>${esc(x.snapshot)} · M${x.mindscape} · #${x.build_id}</option>`).join('');
+ $('editToggle').textContent=editing?'Done editing':'Edit this build';$('editToggle').setAttribute('aria-pressed',String(editing));
+ $('editor').hidden=!editing;
+ if(editing)renderEditor(b);
+ renderView(b);
+}
+function renderEditor(b){
+ const opts=Object.entries(DATA.lookup.weapons).map(([id,name])=>[id,`${name} (${id})`]);if(b.weapon&&!DATA.lookup.weapons[b.weapon.id])opts.push([b.weapon.id,`W-Engine #${b.weapon.id}`]);
+ let top=`<div class="edit-heading"><h3>Edit ${esc(b.agent)}'s build</h3><p class="muted">Changes recalculate below immediately and save in this browser. To use edits on another device, export the JSON backup.</p></div>`;
+ top+=`<div class="edit-grid">${[['agent_level','Agent level',1,60,b.agent_level],['mindscape','Mindscape',0,6,b.mindscape],['core_enhancement','Core enhancement (0–F)',0,6,b.core_enhancement]].map(([k,n,lo,hi,val])=>`<label>${n}${numberInput(k,val,lo,hi)}</label>`).join('')}</div>`;
+ top+=`<h4>Skills</h4><div class="edit-grid">${skillOrder.map(k=>`<label>${esc(k)}<input type="number" min="1" max="16" step="1" data-skill="${esc(k)}" value="${b.skills[k]??1}"></label>`).join('')}</div>`;
+ top+=`<h4>W-Engine</h4><div class="edit-grid"><label class="wide">Equipped engine<select data-weapon="id"><option value="">None</option>${selectOptions(opts,b.weapon?.id||'')}</select></label>${[['level','Level',1,60],['break_level','Ascension',0,5],['refinement','Refinement',1,5]].map(([f,label,mi,ma])=>`<label>${label}<input type="number" data-weapon="${f}" value="${b.weapon?.[f]??(f==='refinement'?1:0)}" min="${mi}" max="${ma}" ${!b.weapon?'disabled':''}></label>`).join('')}</div>`;
+ top+=`<div class="disc-editor-head"><h4>Drive Discs</h4><span class="muted">Set, main stat, and individual substat rolls</span></div>`;
+ for(let slot=1;slot<=6;slot++){
+  const d=b.discs.find(x=>x.slot===slot);
+  if(!d){top+=`<div class="edit-disc"><strong>Disc ${slot} · Empty</strong><button type="button" data-add-disc="${slot}" class="btn alt">Equip disc</button></div>`;continue}
+  top+=`<div class="edit-disc"><div class="disc-edit-top"><strong>Disc ${slot}</strong><span class="muted">${esc(d.rarity)}-rank · UID ${d.uid??'manual'}</span></div>`;
+  top+=`<div class="edit-grid"><label class="wide">Disc set<select data-disc="${slot}" data-prop="set_id">${selectOptions(discSets.map(x=>[x.id,x.name]),d.set_id)}</select></label><label>Disc level<input type="number" data-disc="${slot}" data-prop="level" value="${d.level}" min="0" max="15"></label><label>Main stat<select data-disc="${slot}" data-prop="main">${selectOptions(MAIN_IDS[slot].map(id=>[id,label(id)]),d.main?.[0]?.property_id)}</select></label></div>`;
+  top+=`<div class="edit-sub-header"><span>Substats (roll counts)</span><button type="button" data-add-sub="${slot}" class="btn small" ${d.substats.length>=4?'disabled':''}>+ Add substat</button></div>`;
+  for(let i=0;i<d.substats.length;i++){const s=d.substats[i];top+=`<div class="edit-sub"><select aria-label="Disc ${slot} substat ${i+1}" data-disc="${slot}" data-sub="${i}" data-prop="stat">${selectOptions(SUB_IDS.map(id=>[id,label(id)]),s.property_id)}</select><label>Rolls <input type="number" min="1" max="10" value="${s.rolls}" data-disc="${slot}" data-sub="${i}" data-prop="rolls"></label><output>${esc(s.display)}</output><button type="button" data-remove-sub="${slot}:${i}" title="Remove substat" class="btn danger small">Remove</button></div>`}
+  top+=`</div>`;
+ }
+ $('editor').innerHTML=top;
+}
+function renderView(b){
+ const c=calculate(b),w=b.weapon;
+ let out=`<div class="grid" style="margin-top:15px"><div class="tile"><span>Agent level</span><strong>${b.agent_level}</strong></div><div class="tile"><span>Mindscape</span><strong>M${b.mindscape}</strong></div><div class="tile"><span>Core enhancement</span><strong>${'ABCDEF'[b.core_enhancement-1]||'—'}</strong></div><div class="tile"><span>Drive Discs</span><strong>${b.discs.length}/6</strong></div><div class="tile"><span>W-Engine</span><strong>${w?'Lv '+w.level+' · S'+w.refinement:'None'}</strong></div></div>`;
+ out+=`<section class="panel"><h3 class="sectionTitle">Equipped W-Engine</h3>${w?`<strong style="font-size:18px">${esc(serverName('weapon',w.id,w.name))}</strong><p class="muted">ID ${w.id} · ${w.rarity} · Level ${w.level} · Ascension ${w.break_level} · Refinement S${w.refinement}</p>${c&&c.engP?`<div class="flex"><span class="badge">${esc(label(c.engP))} ${fmt(c.engP,c.engMain)} (approx.)</span><span class="badge">${esc(label(c.secP))} ${fmt(c.secP,c.engSec)} (approx.)</span></div>`:''}`:'No W-Engine saved'}</section>`;
+ out+=`<section class="panel"><h3 class="sectionTitle">Skills</h3><div class="grid">${skillOrder.map(k=>`<div class="tile"><span>${esc(k)}</span><strong>${b.skills[k]??1}</strong></div>`).join('')}</div><p class="muted">Skill levels are raw Enka values. Mindscape bonuses may affect displayed in-game levels.</p></section>`;
+ out+=`<section class="panel"><h3 class="sectionTitle">Calculated character stats</h3>${c?`<div class="grid">${c.stats.map(([k,v])=>`<div class="tile"><span>${esc(k)}</span><strong>${esc(statFormat(k,v))}</strong></div>`).join('')}</div><p class="muted">Estimated unbuffed totals from character base stats, W-Engine, disc stats and static 2-piece bonuses. Dynamic passives and combat buffs are excluded. These values update as you edit.</p>`:`<div class="note">Full character totals require Enka's reference definitions. Once the reference files load, this section recalculates automatically. Disc contributions below always update offline.</div>`}</section>`;
+ out+=`<section class="panel"><h3 class="sectionTitle">Equipped sets</h3><div class="flex">${Object.entries(b.set_ids).map(([id,n])=>`<span class="badge">${n}× ${esc(serverName('set',id,DATA.lookup.discs[id]||id))}</span>`).join('')||'None'}</div></section>`;
+ out+=`<section class="panel"><h3 class="sectionTitle">Drive Discs · Main stats and substats</h3><div class="discGrid">${b.discs.slice().sort((a,b)=>a.slot-b.slot).map(d=>`<article class="disc"><h4>Slot ${d.slot} · ${d.rarity} · +${d.level}</h4><div class="muted">${esc(serverName('set',d.set_id,d.set))}</div><div class="mainstat">${d.main.map(x=>`${esc(x.stat)} ${esc(x.display)}`).join(', ')}</div><table><tbody>${d.substats.map(s=>`<tr><td>${esc(s.stat)} <small>×${s.rolls}</small></td><td>${esc(s.display)}</td></tr>`).join('')}</tbody></table></article>`).join('')}</div></section>`;
+ out+=`<section class="panel"><h3 class="sectionTitle">Drive Disc contributions</h3><div class="statRow">${Object.entries(b.gear_only_props_raw).sort((a,b)=>a[0]-b[0]).map(([id,val])=>`<div><label>${esc(label(id))}</label><b>${esc(fmt(id,val))}</b></div>`).join('')||'<span class="muted">No disc stats</span>'}</div><p class="muted">Excludes innate base stats, W-Engine effects and set bonuses. Uses Enka's approximate Drive Disc main-stat formula; substat rolls are exact.</p></section>`;
+ out+=`<section class="panel"><h3 class="sectionTitle">Snapshot details</h3><p class="muted">Build ${b.build_id} · ${esc(b.snapshot)} · ${b.live?'Live entry':'Saved build'} · Promotion ${b.promotion} · Obtained ${b.other?.ObtainmentTimestamp?new Date(b.other.ObtainmentTimestamp*1000).toLocaleDateString('en-US'):'Unknown'}</p></section>`;
+ $('content').innerHTML=out;
+}
+function applyChange(el){const b=current();if(!b)return;const field=el.dataset.field,skill=el.dataset.skill,weapon=el.dataset.weapon,slot=+(el.dataset.disc||0),property=el.dataset.prop,subIdx=el.dataset.sub;
+ if(field){const ranges={agent_level:[1,60],mindscape:[0,6],core_enhancement:[0,6]};const range=ranges[field];b[field]=safeNum(el.value,range[0],range[1],b[field]);}
+ if(skill)b.skills[skill]=safeNum(el.value,1,16,b.skills[skill]||1);
+ if(weapon){if(weapon==='id'){if(!el.value){b.weapon=null}else{const id=+el.value;b.weapon={id,name:DATA.lookup.weapons[id]||`W-Engine #${id}`,level:60,break_level:5,refinement:1,rarity:id>=14000?'S':id>=13000?'A':'B',uid:null,locked:false}}}else if(b.weapon){const ranges={level:[1,60],break_level:[0,5],refinement:[1,5]};b.weapon[weapon]=safeNum(el.value,...ranges[weapon],b.weapon[weapon]);}}
+ if(slot){const d=b.discs.find(x=>x.slot===slot);if(d){
+  if(property==='set_id'){d.set_id=+el.value;d.uid=null;}
+  if(property==='level')d.level=safeNum(el.value,0,15,d.level);
+  if(property==='main'){const id=+el.value;if(d.substats.some(s=>s.property_id===id)){notify('The same property cannot be both the main stat and a substat. Remove that substat first.');render();return}d.main=[makeMain(d,id)];d.uid=null;}
+  if(subIdx!==undefined){const i=+subIdx,s=d.substats[i];if(!s)return;
+   if(property==='rolls')s.rolls=safeNum(el.value,1,10,s.rolls);
+   if(property==='stat'){const id=+el.value;if(d.main.some(m=>m.property_id===id)||d.substats.some((q,j)=>j!==i&&q.property_id===id)){notify('A disc cannot repeat a substat or match its main stat.');render();return}s.property_id=id;}
+   d.uid=null;
+  }
+ }}
+ b.snapshot='Edited '+new Date().toLocaleDateString('en-CA');b.live=false;b.source='Manual edit in ZZZ Build Library';refreshDerived(b);store();render();
+}
+$('editor').addEventListener('change',e=>{if(e.target.matches('[data-field], [data-skill], [data-weapon], [data-disc]'))applyChange(e.target)});
+$('editor').addEventListener('click',e=>{
+ const a=e.target.closest('[data-add-sub]');if(a){const b=current(),d=b.discs.find(x=>x.slot===+a.dataset.addSub);if(!d||d.substats.length>=4)return;const available=SUB_IDS.filter(id=>!d.substats.some(s=>s.property_id===id)&&!d.main.some(s=>s.property_id===id));if(!available.length)return;d.substats.push(makeSub(available[0],1));b.snapshot='Edited '+new Date().toLocaleDateString('en-CA');store();render();return}
+ const rm=e.target.closest('[data-remove-sub]');if(rm){const [slot,idx]=rm.dataset.removeSub.split(':').map(Number);const b=current(),d=b.discs.find(x=>x.slot===slot);if(!d)return;d.substats.splice(idx,1);b.snapshot='Edited '+new Date().toLocaleDateString('en-CA');store();render();return}
+ const add=e.target.closest('[data-add-disc]');if(add){const b=current(),slot=+add.dataset.addDisc,set_id=31000;const d={slot,id:set_id+40+slot,uid:null,level:15,rarity:'S',set_id,set:DATA.lookup.discs[set_id],main:[],substats:[],locked:false,trash:false};d.main=[makeMain(d,MAIN_IDS[slot][0])];b.discs.push(d);refreshDerived(b);store();render();return}
+});
+$('search').addEventListener('input',agentList);
+$('buildSelect').addEventListener('change',e=>{selectedBuild=e.target.value;render()});
+$('editToggle').onclick=()=>{editing=!editing;render()};
+$('cloneBtn').onclick=()=>{const b=current();if(!b)return;const copy=clone(b);copy.build_id=Date.now();copy.snapshot='Custom '+new Date().toLocaleDateString('en-CA');copy.source='Custom build';copy.live=false;builds.push(copy);selectedBuild=copy.build_id;editing=true;store();agentList();render();notify('Created a separate editable copy of this build.');};
+$('newBtn').onclick=()=>{const keys=Object.entries(DATA.lookup.agents).sort((a,b)=>a[1].localeCompare(b[1]));const answer=prompt('Agent name or numeric ID (example: Burnice or 1171):');if(!answer)return;
+ const entry=keys.find(([id,n])=>id===answer.trim()||n.toLowerCase()===answer.trim().toLowerCase());if(!entry){notify('Unknown agent. Use the numeric ID of a supported agent or import an Enka export.');return}
+ const [id,agent]=entry;const discs=[];for(let slot=1;slot<=6;slot++){const d={slot,id:31040+slot,uid:null,level:15,rarity:'S',set_id:31000,set:DATA.lookup.discs[31000],main:[],substats:[],locked:false,trash:false};d.main=[makeMain(d,MAIN_IDS[slot][0])];discs.push(d)}
+ const b={agent_id:+id,agent,build_id:Date.now(),snapshot:'New manual build',live:false,source_order:0,agent_level:60,promotion:6,mindscape:0,core_enhancement:0,skills:Object.fromEntries(skillOrder.map(x=>[x,1])),weapon:null,discs,set_counts:{},set_ids:{},gear_only_props_raw:{},other:{},source:'Created manually'};
+ refreshDerived(b);builds.push(b);selectedAgent=agent;selectedBuild=b.build_id;editing=true;store();agentList();render();notify('New manual build created. Edit its values and export a JSON backup when ready.');};
+$('exportBtn').onclick=()=>{const content={...clone(DATA),metadata:{...clone(DATA.metadata),account_uid:activeUid,exportedAt:new Date().toISOString(),editor:'ZZZ Build Manager — Public UID Editor',agent_count:new Set(builds.map(b=>b.agent)).size,snapshot_count:builds.length},builds};
+ const blob=new Blob([JSON.stringify(content,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`ZZZ_${activeUid||'imported'}_builds.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);notify('Exported your current builds to JSON. This file can be imported into the site or shared for analysis.');};
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{
+ const json=JSON.parse(await f.text());let incoming=[];if(Array.isArray(json)) incoming=json;
+ else if(Array.isArray(json.builds)) incoming=json.builds;
+ else if(json.PlayerInfo)incoming=convertShowcase(json);
+ else if(Object.values(json).some(Array.isArray))incoming=convertSaved(json);
+ if(!Array.isArray(incoming)||!incoming.length||!incoming.every(x=>x.agent&&x.agent_id&&Array.isArray(x.discs)))throw Error('Unrecognized build format. Import Enka JSON or a build-manager export.');
+ const uid=(activeUid||json.metadata?.account_uid||$('uidInput').value.trim()||'imported');
+ if(activeUid&&builds.length&&!confirm(`Replace your ${builds.length} current builds for UID ${uid} with ${incoming.length} imported entries?`))return;
+ openAccount(uid,incoming,{reset:true,username:json?.owner?.username||'',source:'Imported JSON'});notify(`Imported ${incoming.length} build entries for ${uid}.`);
+ }catch(err){showWelcomeError('Import failed: '+err.message);notify('Import failed: '+err.message)}finally{e.target.value=''}
+});
+$('resetBtn').onclick=()=>{if(!confirm('Discard local edits and reset to the last downloaded or imported snapshot for this UID? Export a backup first if needed.'))return;builds=clone(rawBackup);selectedBuild=null;try{localStorage.removeItem(STORAGE_KEY)}catch(e){}agentList();render();notify('Restored the last imported Enka snapshot.');};
+// The account landing screen controls initial rendering.
+(async()=>{try{const paths=['avatars.json','weapons.json','equipments.json','locs.json'];const raw=await Promise.all(paths.map(async f=>{const response=await fetch(enkaRoot+f,{cache:'force-cache'});if(!response.ok)throw Error(`${f}: HTTP ${response.status}`);return response.json()}));refs={avatars:raw[0],weapons:raw[1],equipments:raw[2],locs:raw[3]};$('liveStatus').innerHTML='<strong class="good">Reference data loaded.</strong> Character stat totals will recalculate whenever you change equipment or levels.';render();}
+catch(err){$('liveStatus').textContent='Enka reference data could not load ('+err.message+'). Build editing, local saving, exporting and disc-stat calculations still work. Full character totals require an internet connection and access to Enka reference files.';}})();
+
+
+function showWelcomeError(message){$('welcomeMsg').textContent=message;$('welcomeMsg').hidden=false}
+function showWorkspace(){ $('welcome').hidden=true;$('workspace').hidden=false; }
+function showWelcome(){ $('workspace').hidden=true;$('welcome').hidden=false;$('welcomeMsg').hidden=true; }
+function localKey(uid){return 'zzz_build_manager_uid_v2:'+uid;}
+function savedFor(uid){try{const parsed=JSON.parse(localStorage.getItem(localKey(uid)));return Array.isArray(parsed?.builds)?parsed.builds:null}catch(e){return null}}
+function prettyAccount(uid,username=''){return username?`${username} · UID ${uid}`:`UID ${uid}`}
+function openAccount(uid,incoming,options={}){
+ if(!/^(?:[0-9]{8,12}|imported)$/.test(String(uid)))throw Error('UID should contain 8–12 digits');
+ activeUid=String(uid);STORAGE_KEY=localKey(activeUid);lastOwner=options.owner||null;
+ let result=incoming;
+ if(!options.reset){const local=savedFor(activeUid);if(local?.length)result=local;}
+ rawBackup=clone(incoming||[]);builds=clone(result||[]);
+ if(!selectedAgent||!builds.some(b=>b.agent===selectedAgent))selectedAgent=builds[0]?.agent||'';
+ selectedBuild=null;editing=false;
+ for(const b of builds)refreshDerived(b);
+ $('accountTitle').textContent=prettyAccount(activeUid,options.username);
+ $('saveStatus').textContent=options.reset?'Edits save separately for this UID':(savedFor(activeUid)?.length?'Loaded browser edits for this UID':'Changes will be stored only for this UID');
+ $('welcomeMsg').hidden=true;showWorkspace();agentList();render();
+ try{const u=new URL(location.href);if(activeUid!=='imported')u.searchParams.set('uid',activeUid);else u.searchParams.delete('uid');history.replaceState(null,'',u)}catch(e){}
+}
+function normalizeAvatar(raw,id,labelText,live,buildId){
+ const aid=+(raw?.Id??id);if(!aid)return null;
+ const agent=DATA.lookup.agents[aid]||resolveAgent(aid)||`Agent #${aid}`;
+ const w=raw.Weapon||null;
+ const weapon=w?{id:+w.Id,name:DATA.lookup.weapons[w.Id]||`W-Engine #${w.Id}`,level:+w.Level||1,break_level:+w.BreakLevel||0,refinement:+w.UpgradeLevel||1,rarity:w.Id>=14000?'S':w.Id>=13000?'A':'B',uid:w.Uid??null,locked:!!w.IsLocked}:null;
+ const skills={};for(const sk of raw.SkillLevelList||[]){const names={0:'Basic Attack',1:'Special Attack',2:'Dodge',3:'Chain / Ultimate',5:'Core Skill (raw)',6:'Assist'};if(names[sk.Index])skills[names[sk.Index]]=sk.Level;}
+ const discs=(raw.EquippedList||[]).filter(v=>v.Equipment).map(row=>{
+  const e=row.Equipment,id=+e.Id,slot=+row.Slot,setId=Math.floor(id/100)*100,rarity=+(id%100)>=40?'S':+(id%100)>=30?'A':'B';
+  const main=(e.MainPropertyList||[]).map(p=>({property_id:+p.PropertyId,source_base:+p.PropertyValue||0}));
+  const substats=(e.RandomPropertyList||[]).map(p=>makeSub(+p.PropertyId,+p.PropertyLevel||1));
+  return {slot,id,uid:e.Uid??null,level:e.Level||0,rarity,set_id:setId,set:DATA.lookup.discs[setId]||`Disc set #${setId}`,main,substats,locked:!!e.IsLocked,trash:!!e.IsTrash};
+ });
+ const b={agent_id:aid,agent,build_id:String(buildId),snapshot:String(labelText||'Enka showcase'),live:!!live,source_order:0,agent_level:+raw.Level||1,promotion:+raw.PromotionLevel||0,mindscape:+raw.TalentLevel||0,core_enhancement:+raw.CoreSkillEnhancement||0,skills,weapon,discs,set_counts:{},set_ids:{},gear_only_props_raw:{},other:{SkinId:raw.SkinId,UpgradeId:raw.UpgradeId,IsUpgradeUnlocked:raw.IsUpgradeUnlocked,ObtainmentTimestamp:raw.ObtainmentTimestamp},source:'Enka public data'};
+ refreshDerived(b);return b;
+}
+function resolveAgent(id){const info=refs?.avatars?.[id],dict=refs?.locs?.en||{};if(!info)return '';const props=['Name','AvatarName','NameHash','ItemName','NameTextMapHash'];for(const k of props){const val=info[k];if(val&&dict[val])return dict[val];if(typeof val==='string'&&!/^\d+$/.test(val)&&val.length<40)return val;}return '';}
+function convertShowcase(data){const agents=data?.PlayerInfo?.ShowcaseDetail?.AvatarList||[];if(!Array.isArray(agents))return [];
+ return agents.map((v,i)=>normalizeAvatar(v,v.Id,'Current showcase',true,`showcase-${v.Id}-${i}`)).filter(Boolean);
+}
+function convertSaved(data){if(!data||typeof data!=='object')return [];return Object.entries(data).flatMap(([id,entries])=>Array.isArray(entries)?entries.map((e,i)=>normalizeAvatar(e.avatar_data,+e.avatar_id||+id,e.name||(e.live?'Saved showcase':'Enka saved build'),!!e.live,e.id||`saved-${id}-${i}`)).filter(Boolean):[])}
+function combined(showcase,saved){const all=[...saved];for(const s of showcase){const match=all.some(b=>b.agent_id===s.agent_id&&b.live&&JSON.stringify(b.discs.map(x=>x.uid))===JSON.stringify(s.discs.map(x=>x.uid)));if(!match)all.push(s)}return all;}
+async function apiGet(path){const base=ENKA_PROXY_BASE.replace(/\/$/,'')||'https://enka.network';const res=await fetch(base+path,{headers:{Accept:'application/json'},cache:'no-store'});
+ if(!res.ok){const errors={400:'UID format is invalid',404:'No public Enka data found for that account',424:'ZZZ data temporarily unavailable during maintenance',429:'Enka rate limit reached; try again later',500:'Enka server error',503:'Enka temporarily unavailable'};throw Error(errors[res.status]||`Enka returned HTTP ${res.status}`)}return res.json();}
+async function lookupUid(uid,{force=false}={}){
+ if(!/^[0-9]{8,12}$/.test(uid)){showWelcomeError('Enter a valid numeric ZZZ UID (8–12 digits).');return}
+ const local=savedFor(uid);if(local?.length&&!force){openAccount(uid,local,{reset:false,source:'Browser storage'});notify('Loaded your previously edited builds. Use Refresh from Enka if you want to replace them with a fresh public snapshot.');return}
+ if(force&&builds.length&&!confirm('Refresh from Enka and replace the locally edited builds for this UID? Export a JSON backup first if you need those edits.'))return;
+ const btn=$('uidLoadBtn');btn.disabled=true;btn.textContent='Loading…';$('welcomeMsg').hidden=true;
+ try{
+  const full=await apiGet(`/api/zzz/uid/${uid}/`);const showcase=convertShowcase(full);const owner=full?.owner||null;let saved=[],warning='';
+  if(owner?.username&&owner?.hash){try{const savedResponse=await apiGet(`/api/profile/${encodeURIComponent(owner.username)}/hoyos/${encodeURIComponent(owner.hash)}/builds/`);saved=convertSaved(savedResponse)}catch(e){warning=`Saved builds unavailable (${e.message}). Loaded public showcase instead.`}}
+  const result=combined(showcase,saved);
+  if(!result.length)throw Error('This account has no visible agents. Enable Show Character Details in your public in-game showcase, or import an Enka JSON file.');
+  ttlDeadline=Date.now()+Math.max(0,Number(full?.ttl)||0)*1000;
+  openAccount(uid,result,{reset:true,username:full?.PlayerInfo?.SocialDetail?.ProfileDetail?.Nickname||owner?.username||'',owner});
+  store();notify(`Loaded ${result.length} build entries from Enka.${warning?' '+warning:''}`);
+ }catch(e){if(!force)showWelcome();else notify('Refresh failed; kept your existing browser edits: '+e.message);if(!force)showWelcomeError(`${e.message}. If this site is hosted on GitHub Pages, your browser may block Enka’s API because of CORS. You can still import a JSON export, use Start empty, or configure the optional proxy described in README.`);}
+ finally{btn.disabled=false;btn.textContent='Find my agents'}
+}
+$('uidForm').addEventListener('submit',e=>{e.preventDefault();lookupUid($('uidInput').value.trim())});
+$('landingImportBtn').onclick=()=>$('importFile').click();
+$('emptyUidBtn').onclick=()=>{const uid=$('uidInput').value.trim();if(!/^[0-9]{8,12}$/.test(uid)){showWelcomeError('Enter an 8–12 digit ZZZ UID to keep your manually entered builds separate.');return}openAccount(uid,[],{reset:false,source:'Manual'});notify('This is an empty draft for that UID. Use Add agent manually or Import JSON to add builds.');};
+$('changeUidBtn').onclick=()=>{showWelcome();$('uidInput').value='';$('uidInput').focus()};
+$('refreshBtn').onclick=()=>{if(Date.now()<ttlDeadline){notify('Enka has cached this UID recently. Refresh after its TTL expires to avoid needless rate-limited requests.');return}
+ $('uidInput').value=activeUid;lookupUid(activeUid,{force:true});};
+try{const uri=new URL(location.href),uid=uri.searchParams.get('uid')||'';if(/^[0-9]{8,12}$/.test(uid)){ $('uidInput').value=uid;const local=savedFor(uid);if(local?.length)openAccount(uid,local,{reset:false});else lookupUid(uid);}}catch(e){}
+
+</script></body></html>
