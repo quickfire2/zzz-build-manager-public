@@ -7,7 +7,7 @@
 @media(max-width:940px){.app{grid-template-columns:210px 1fr}nav{padding:9px}main{padding:14px}.edit-grid label.wide{grid-column:auto}.edit-sub{grid-template-columns:1fr 90px}.edit-sub output{justify-self:start}}
 @media(max-width:640px){.app{display:block}nav{position:relative;max-height:150px;border-right:none;border-bottom:1px solid #304058}.edit-sub{grid-template-columns:1fr 70px}.actions .save-status{margin:0;width:100%}}
 
-.welcome{min-height:calc(100vh - 102px);display:grid;place-items:center;padding:36px 16px}.welcome-card{max-width:570px;width:100%;background:var(--p);border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:0 12px 40px #050b1690}.welcome h2{font-size:27px;margin:8px 0}.welcome p{color:var(--mut);line-height:1.65}.eyebrow{letter-spacing:.12em;font-size:11px;color:var(--a);font-weight:800}.uid-form label{display:block;font-weight:650;margin:22px 0 9px}.uid-row{display:flex;gap:10px}.uid-row input{background:#111d30;border:1px solid #57738e;border-radius:8px;color:#fff;font:inherit;padding:12px 15px;min-width:0;flex:1;font-size:17px}.uid-row .btn{white-space:nowrap}.welcome-split{border-top:1px solid var(--border);margin:25px 0 10px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--mut)}.session-bar{border:1px solid #314761;background:#15283d;border-radius:9px;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 13px;margin-bottom:16px}.session-bar span{font-weight:650}.session-bar div{display:flex;gap:8px}.empty{padding:32px;text-align:center;border:1px dashed #506c86;border-radius:12px;color:var(--mut)}@media(max-width:620px){.uid-row,.welcome-split,.session-bar{flex-wrap:wrap}.uid-row .btn,.uid-row input{width:100%}.welcome-card{padding:20px}.welcome{padding:12px}}
+.welcome{min-height:calc(100vh - 102px);display:grid;place-items:center;padding:36px 16px}.welcome-card{max-width:570px;width:100%;background:var(--p);border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:0 12px 40px #050b1690}.welcome h2{font-size:27px;margin:8px 0}.welcome p{color:var(--mut);line-height:1.65}.eyebrow{letter-spacing:.12em;font-size:11px;color:var(--a);font-weight:800}.uid-form label{display:block;font-weight:650;margin:22px 0 9px}.uid-row{display:flex;gap:10px}.uid-row input{background:#111d30;border:1px solid #57738e;border-radius:8px;color:#fff;font:inherit;padding:12px 15px;min-width:0;flex:1;font-size:17px}.uid-row .btn{white-space:nowrap}.recent-accounts{border-top:1px solid var(--border);margin-top:20px;padding-top:17px}.recent-accounts h3{margin:0 0 8px;font-size:15px}.recent-account{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}.recent-account small{display:block;margin-top:3px}.welcome-split{border-top:1px solid var(--border);margin:25px 0 10px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--mut)}.session-bar{border:1px solid #314761;background:#15283d;border-radius:9px;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 13px;margin-bottom:16px}.session-bar span{font-weight:650}.session-bar div{display:flex;gap:8px}.empty{padding:32px;text-align:center;border:1px dashed #506c86;border-radius:12px;color:var(--mut)}@media(max-width:620px){.uid-row,.welcome-split,.session-bar{flex-wrap:wrap}.uid-row .btn,.uid-row input{width:100%}.welcome-card{padding:20px}.welcome{padding:12px}}
 </style></head><body><header><h1>Zenless Zone Zero · Build Manager</h1><p>Look up your own agents, experiment with Drive Discs and skills, and save private browser drafts.</p></header><section id="welcome" class="welcome" aria-label="Find your ZZZ account">
   <div class="welcome-card">
     <div class="eyebrow">GET STARTED</div>
@@ -15,8 +15,9 @@
     <p>Enter your Zenless Zone Zero UID to load your public Enka showcase. If your Enka profile shares saved builds, those may be included too. No HoYoverse password is needed.</p>
     <form id="uidForm" class="uid-form"><label for="uidInput">Zenless Zone Zero UID</label><div class="uid-row"><input id="uidInput" inputmode="numeric" autocomplete="off" pattern="[0-9]{8,12}" maxlength="12" placeholder="Enter your UID" required><button type="submit" id="uidLoadBtn" class="btn">Find my agents</button></div></form>
     <div id="welcomeMsg" class="message" role="status" hidden></div>
+    <div id="recentAccounts" class="recent-accounts" hidden><h3>Continue a saved account</h3><div id="recentAccountList"></div></div>
     <div class="welcome-split"><span>Or start without fetching</span><div class="flex"><button type="button" id="emptyUidBtn" class="btn alt">Start empty</button><button type="button" id="landingImportBtn" class="btn alt">Import JSON</button></div></div>
-    <p class="muted" style="font-size:12px">Only public Showcase and saved builds can be fetched. Edits stay on this device unless exported. An API proxy may be required on GitHub Pages depending on Enka's cross-origin settings.</p>
+    <p class="muted" style="font-size:12px">Imported JSON and edits are saved in this browser and normally reopen after refresh. Clearing site data removes the saved copies; export JSON backups for safety.</p><p class="muted" style="font-size:12px">Only public Showcase and saved builds can be fetched. Edits stay on this device unless exported. An API proxy may be required on GitHub Pages depending on Enka's cross-origin settings.</p>
   </div>
 </section>
 <div class="app" id="workspace" hidden><nav><input id="search" placeholder="Find an agent…" aria-label="Find an agent"><div id="agentNav"></div></nav><main><div class="session-bar"><span id="accountTitle">Account</span><div><button id="refreshBtn" type="button" class="btn alt small">Refresh from Enka</button> <button id="changeUidBtn" type="button" class="btn alt small">Switch UID</button></div></div><div class="tools"><div><h2 id="agentName" style="font-size:25px;margin:0"></h2><div id="metaLine" class="hint"></div></div><select id="buildSelect" aria-label="Choose saved build"></select></div><div class="actions">
@@ -39,6 +40,8 @@ const enkaRoot='https://raw.githubusercontent.com/EnkaNetwork/API-docs/master/st
 const ENKA_PROXY_BASE = ''; // Optional: set to your Cloudflare Worker base URL, e.g. https://your-worker.workers.dev
 let activeUid = '';
 let STORAGE_KEY = '';
+const LAST_ACCOUNT_KEY = 'zzz_build_manager_last_uid_v1';
+const ACCOUNT_PREFIX = 'zzz_build_manager_uid_v2:';
 let ttlDeadline = 0;
 let lastOwner = null;
 const percentIDs = new Set([11102,12102,12202,13102,20101,20103,21101,21103,23101,23103,30502,31402,31503,31603,31703,31803,31903,32303]);
@@ -80,7 +83,18 @@ function refreshDerived(b){
  b.set_counts=sets;b.set_ids=ids;b.gear_only_props_raw=gears;
 }
 function store(){
- try{localStorage.setItem(STORAGE_KEY,JSON.stringify({builds,editedAt:new Date().toISOString()}));persistAvailable=true;$('saveStatus').textContent='Saved in this browser · '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});}catch(e){persistAvailable=false;$('saveStatus').textContent='Changes not stored locally. Export JSON to keep them.';}
+ try{
+  if(!STORAGE_KEY || !activeUid)throw Error('No selected account');
+  localStorage.setItem(STORAGE_KEY,JSON.stringify({builds,editedAt:new Date().toISOString()}));
+  localStorage.setItem(LAST_ACCOUNT_KEY,activeUid);
+  persistAvailable=true;
+  $('saveStatus').textContent='Saved in this browser · '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+  return true;
+ }catch(e){
+  persistAvailable=false;
+  $('saveStatus').textContent='Changes not stored locally. Export JSON to keep them.';
+  return false;
+ }
 }
 function notify(msg){$('message').textContent=msg;$('message').hidden=false;}
 function byAgent(){return builds.filter(b=>b.agent===selectedAgent)}
@@ -192,7 +206,9 @@ $('importFile').addEventListener('change',async e=>{const f=e.target.files?.[0];
  if(!Array.isArray(incoming)||!incoming.length||!incoming.every(x=>x.agent&&x.agent_id&&Array.isArray(x.discs)))throw Error('Unrecognized build format. Import Enka JSON or a build-manager export.');
  const uid=(activeUid||json.metadata?.account_uid||$('uidInput').value.trim()||'imported');
  if(activeUid&&builds.length&&!confirm(`Replace your ${builds.length} current builds for UID ${uid} with ${incoming.length} imported entries?`))return;
- openAccount(uid,incoming,{reset:true,username:json?.owner?.username||'',source:'Imported JSON'});notify(`Imported ${incoming.length} build entries for ${uid}.`);
+ openAccount(uid,incoming,{reset:true,username:json?.owner?.username||'',source:'Imported JSON'});
+ const saved=store();
+ notify(saved?`Imported and saved ${incoming.length} build entries for ${uid}. They'll reopen after a refresh.`:`Imported ${incoming.length} entries, but browser storage failed. Export JSON to avoid losing them after a refresh.`);
  }catch(err){showWelcomeError('Import failed: '+err.message);notify('Import failed: '+err.message)}finally{e.target.value=''}
 });
 $('resetBtn').onclick=()=>{if(!confirm('Discard local edits and reset to the last downloaded or imported snapshot for this UID? Export a backup first if needed.'))return;builds=clone(rawBackup);selectedBuild=null;try{localStorage.removeItem(STORAGE_KEY)}catch(e){}agentList();render();notify('Restored the last imported Enka snapshot.');};
@@ -203,13 +219,43 @@ catch(err){$('liveStatus').textContent='Enka reference data could not load ('+er
 
 function showWelcomeError(message){$('welcomeMsg').textContent=message;$('welcomeMsg').hidden=false}
 function showWorkspace(){ $('welcome').hidden=true;$('workspace').hidden=false; }
-function showWelcome(){ $('workspace').hidden=true;$('welcome').hidden=false;$('welcomeMsg').hidden=true; }
-function localKey(uid){return 'zzz_build_manager_uid_v2:'+uid;}
+function showWelcome(){ $('workspace').hidden=true;$('welcome').hidden=false;$('welcomeMsg').hidden=true;renderSavedAccounts(); }
+function localKey(uid){return ACCOUNT_PREFIX+uid;}
 function savedFor(uid){try{const parsed=JSON.parse(localStorage.getItem(localKey(uid)));return Array.isArray(parsed?.builds)?parsed.builds:null}catch(e){return null}}
-function prettyAccount(uid,username=''){return username?`${username} · UID ${uid}`:`UID ${uid}`}
+function prettyAccount(uid,username=''){if(uid==='imported')return 'Imported JSON · Local builds';return username?`${username} · UID ${uid}`:`UID ${uid}`}
+function listSavedAccounts(){
+ const accounts=[];
+ try{
+  for(let i=0;i<localStorage.length;i++){
+   const key=localStorage.key(i);
+   if(!key?.startsWith(ACCOUNT_PREFIX))continue;
+   const uid=key.slice(ACCOUNT_PREFIX.length);
+   if(!/^(?:[0-9]{8,12}|imported)$/.test(uid))continue;
+   const raw=JSON.parse(localStorage.getItem(key));
+   if(!Array.isArray(raw?.builds)||!raw.builds.length)continue;
+   accounts.push({uid,count:raw.builds.length,editedAt:raw.editedAt||''});
+  }
+ }catch(e){/* Site storage disabled; JSON import/export still works */}
+ return accounts.sort((a,b)=>b.editedAt.localeCompare(a.editedAt));
+}
+function renderSavedAccounts(){
+ const accounts=listSavedAccounts();
+ $('recentAccounts').hidden=!accounts.length;
+ $('recentAccountList').innerHTML=accounts.map(x=>`<div class="recent-account"><div><strong>${esc(x.uid==='imported'?'Imported JSON':`UID ${x.uid}`)}</strong><small>${x.count} saved build${x.count===1?'':'s'}</small></div><button class="btn small alt" type="button" data-resume-uid="${esc(x.uid)}">Open builds</button></div>`).join('');
+}
+function resumeSavedAccount(uid){
+ const local=savedFor(uid);
+ if(!local?.length)return showWelcomeError('No locally saved builds found for this account. Import the JSON file again.');
+ openAccount(uid,local,{reset:false,source:'Browser storage'});
+ notify('Restored your locally saved builds. No Enka request was needed.');
+}
+$('recentAccountList').addEventListener('click',e=>{
+ const target=e.target.closest('[data-resume-uid]');if(target)resumeSavedAccount(target.dataset.resumeUid);
+});
 function openAccount(uid,incoming,options={}){
  if(!/^(?:[0-9]{8,12}|imported)$/.test(String(uid)))throw Error('UID should contain 8–12 digits');
  activeUid=String(uid);STORAGE_KEY=localKey(activeUid);lastOwner=options.owner||null;
+ try{localStorage.setItem(LAST_ACCOUNT_KEY,activeUid)}catch(e){}
  let result=incoming;
  if(!options.reset){const local=savedFor(activeUid);if(local?.length)result=local;}
  rawBackup=clone(incoming||[]);builds=clone(result||[]);
@@ -266,6 +312,21 @@ $('emptyUidBtn').onclick=()=>{const uid=$('uidInput').value.trim();if(!/^[0-9]{8
 $('changeUidBtn').onclick=()=>{showWelcome();$('uidInput').value='';$('uidInput').focus()};
 $('refreshBtn').onclick=()=>{if(Date.now()<ttlDeadline){notify('Enka has cached this UID recently. Refresh after its TTL expires to avoid needless rate-limited requests.');return}
  $('uidInput').value=activeUid;lookupUid(activeUid,{force:true});};
-try{const uri=new URL(location.href),uid=uri.searchParams.get('uid')||'';if(/^[0-9]{8,12}$/.test(uid)){ $('uidInput').value=uid;const local=savedFor(uid);if(local?.length)openAccount(uid,local,{reset:false});else lookupUid(uid);}}catch(e){}
+// Reopen the last saved account on page refresh, including accounts imported without a UID.
+// An explicit ?uid= takes precedence, so sharing a link to an account still works.
+try{
+ const uri=new URL(location.href),urlUid=uri.searchParams.get('uid')||'';
+ const lastUid=localStorage.getItem(LAST_ACCOUNT_KEY)||'';
+ if(/^[0-9]{8,12}$/.test(urlUid)){
+  $('uidInput').value=urlUid;
+  const local=savedFor(urlUid);
+  if(local?.length)resumeSavedAccount(urlUid);else lookupUid(urlUid);
+ }else if(/^(?:[0-9]{8,12}|imported)$/.test(lastUid)&&savedFor(lastUid)?.length){
+  $('uidInput').value=lastUid==='imported'?'':lastUid;
+  resumeSavedAccount(lastUid);
+ }else{
+  renderSavedAccounts();
+ }
+}catch(e){renderSavedAccounts();}
 
 </script></body></html>
