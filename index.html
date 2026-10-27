@@ -37,7 +37,7 @@ const DATA={"metadata":{"app":"ZZZ Build Manager","source":"Public Enka UID look
 const $ = id => document.getElementById(id);
 const esc = value => String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 const enkaRoot='https://raw.githubusercontent.com/EnkaNetwork/API-docs/master/store/zzz/';
-const ENKA_PROXY_BASE = ''; // Optional: set to your Cloudflare Worker base URL, e.g. https://your-worker.workers.dev
+const ENKA_PROXY_BASE = 'https://zzz-enka-proxy.quickfire199.workers.dev/'; // Optional: set to your Cloudflare Worker base URL, e.g. https://your-worker.workers.dev
 let activeUid = '';
 let STORAGE_KEY = '';
 const LAST_ACCOUNT_KEY = 'zzz_build_manager_last_uid_v1';
