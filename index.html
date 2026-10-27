@@ -8,7 +8,7 @@
 @media(max-width:640px){.app{display:block}nav{position:relative;max-height:150px;border-right:none;border-bottom:1px solid #304058}.edit-sub{grid-template-columns:1fr 70px}.actions .save-status{margin:0;width:100%}}
 
 .welcome{min-height:calc(100vh - 102px);display:grid;place-items:center;padding:36px 16px}.welcome-card{max-width:570px;width:100%;background:var(--p);border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:0 12px 40px #050b1690}.welcome h2{font-size:27px;margin:8px 0}.welcome p{color:var(--mut);line-height:1.65}.eyebrow{letter-spacing:.12em;font-size:11px;color:var(--a);font-weight:800}.uid-form label{display:block;font-weight:650;margin:22px 0 9px}.uid-row{display:flex;gap:10px}.uid-row input{background:#111d30;border:1px solid #57738e;border-radius:8px;color:#fff;font:inherit;padding:12px 15px;min-width:0;flex:1;font-size:17px}.uid-row .btn{white-space:nowrap}.recent-accounts{border-top:1px solid var(--border);margin-top:20px;padding-top:17px}.recent-accounts h3{margin:0 0 8px;font-size:15px}.recent-account{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}.recent-account small{display:block;margin-top:3px}.welcome-split{border-top:1px solid var(--border);margin:25px 0 10px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--mut)}.session-bar{border:1px solid #314761;background:#15283d;border-radius:9px;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 13px;margin-bottom:16px}.session-bar span{font-weight:650}.session-bar div{display:flex;gap:8px}.empty{padding:32px;text-align:center;border:1px dashed #506c86;border-radius:12px;color:var(--mut)}@media(max-width:620px){.uid-row,.welcome-split,.session-bar{flex-wrap:wrap}.uid-row .btn,.uid-row input{width:100%}.welcome-card{padding:20px}.welcome{padding:12px}}
-</style></head><body><header><h1>Zenless Zone Zero · Build Manager</h1><p>Look up your own agents, experiment with Drive Discs and skills, and save private browser drafts.</p></header><section id="welcome" class="welcome" aria-label="Find your ZZZ account">
+</style><link rel="stylesheet" href="./roster.css"></head><body><header><h1>Zenless Zone Zero · Build Manager</h1><p>Look up your own agents, experiment with Drive Discs and skills, and save private browser drafts.</p></header><section id="welcome" class="welcome" aria-label="Find your ZZZ account">
   <div class="welcome-card">
     <div class="eyebrow">GET STARTED</div>
     <h2>Your ZZZ builds, not anyone else’s.</h2>
@@ -329,4 +329,4 @@ try{
  }
 }catch(e){renderSavedAccounts();}
 
-</script></body></html>
+</script><script src="./roster.js"></script></body></html>
